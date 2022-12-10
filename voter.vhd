@@ -66,6 +66,8 @@ type state_type is (idle, for_l, end_state);
 signal state_reg, state_reg_s, state_next: state_type;
 
 signal k_reg, k_next: std_logic_vector(size-1 downto 0);
+type sum_t is array (0 to size-1) of integer;
+signal sum_s: sum_t;
 --type adder_array is array (0 to n-1) of std_logic_Vector(size-1 downto 0);
 --signal voter_adder_array: adder_a
 --type sum_type is array (0 to size-1) of std_logic_vector(7 downto 0);
@@ -142,12 +144,13 @@ begin
                   --  to_integer(unsigned'(m_i(i*n+3*size)&'0')) + to_integer(unsigned'(m_i(i*n+4*size)&'0')));
             --sum <= to_integer(unsigned'('0'&m(15)));
 --           sum := 3*cnt;
+            sum_s(i) <= sum;
            
-                if sum > n then
-                    tmp(i) <=  '1';
-                else
-                    tmp(i) <=  '0';
-                end if;
+--                if sum_s(i) > n then
+--                    tmp(i) <=  '1';
+--                else
+--                    tmp(i) <=  '0';
+--                end if;
                 sum := 0;
 --                k_next <= k_reg + 1;
 --                state_next <= end_state;
@@ -160,6 +163,16 @@ begin
         end loop;
 --        end case;
     --end if;
+     end process;
+     tmp_gen: process(sum_s)
+     begin
+        for i in 0 to size-1 loop
+            if sum_s(i) > n then
+                tmp(i) <=  '1';
+            else
+                tmp(i) <=  '0';
+            end if;
+        end loop;
      end process;
     v <= tmp;
 end Behavioral;
