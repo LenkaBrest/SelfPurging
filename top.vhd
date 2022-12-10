@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity top is
-    generic(n: integer :=3;
+    generic(n: integer :=5;
             size: integer:= 24);
     port(clk: in std_logic;
          rst: in std_logic;

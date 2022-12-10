@@ -66,7 +66,7 @@ type state_type is (idle, for_l, end_state);
 signal state_reg, state_reg_s, state_next: state_type;
 
 signal k_reg, k_next: std_logic_vector(size-1 downto 0);
-type sum_t is array (0 to size-1) of integer;
+type sum_t is array (0 to size-1) of std_logic_vector(3*n-1 downto 0);
 signal sum_s: sum_t;
 --type adder_array is array (0 to n-1) of std_logic_Vector(size-1 downto 0);
 --signal voter_adder_array: adder_a
@@ -144,7 +144,7 @@ begin
                   --  to_integer(unsigned'(m_i(i*n+3*size)&'0')) + to_integer(unsigned'(m_i(i*n+4*size)&'0')));
             --sum <= to_integer(unsigned'('0'&m(15)));
 --           sum := 3*cnt;
-            sum_s(i) <= sum;
+            sum_s(i) <= std_logic_vector(to_unsigned(sum, 3*n));
            
 --                if sum_s(i) > n then
 --                    tmp(i) <=  '1';
