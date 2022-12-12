@@ -25,6 +25,7 @@ add_files -norecurse 	./mac.vhd
 add_files -norecurse 	./sort.vhd
 add_files -norecurse 	./top.vhd
 add_files -norecurse 	./voter.vhd
+add_files -norecurse 	./utils_pkg.vhd
 add_files -fileset constrs_1 ./constr.xdc
 add_files -fileset sim_1 ./fix_fir_tb.vhd
 update_compile_order -fileset sources_1
